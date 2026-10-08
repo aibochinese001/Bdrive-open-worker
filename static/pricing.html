@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b1230" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="BDrive" />
+<script src="/js/pwa.js" defer></script>
+<title>会员升级 · BDrive</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="container">
+  <div class="card" style="text-align:center;padding:30px 20px">
+    <h1 style="font-size:24px">选择适合你的会员方案</h1>
+    <p class="muted">更大存储空间 · 更大单文件上限 · 高速上传下载 · 安全分享</p>
+    <div id="current-tier" class="small mt8"></div>
+  </div>
+  <div class="plan-grid" id="plans"></div>
+
+  <div class="card mt16" id="pay-card" style="display:none">
+    <h3>选择支付方式</h3>
+    <div class="pay-methods" id="methods"></div>
+    <div class="flex-end mt16">
+      <button class="btn btn-primary" id="pay-btn" style="padding:10px 28px">立即支付</button>
+    </div>
+  </div>
+</div>
+<script src="/js/common.js"></script>
+<script src="/js/pwd-toggle.js"></script>
+<script>
+  let PLANS = [], METHODS = [], selectedPlan = null, selectedMethod = null;
+
+  async function init() {
+    const me = await renderNav('pricing');
+    if (!me) return;
+    document.getElementById('current-tier').innerHTML =
+      `当前套餐：<strong>${esc(me.tier_name)}</strong>` +
+      (me.membership_expires_at ? ` · 有效期至 ${fmtDate(me.membership_expires_at)}` : '');
+    const r = await api('/plans');
+    PLANS = r.plans; METHODS = r.methods;
+    renderPlans();
+    renderMethods();
+  }
+
+  function durationText(p) {
+    if (p.duration_type === 'forever') return '永久';
+    const u = { day: '天', month: '个月', year: '年' }[p.duration_type];
+    return p.duration_value + u;
+  }
+
+  function renderPlans() {
+    document.getElementById('plans').innerHTML = PLANS.map((p, i) => `
+      <div class="card plan-card ${i === 1 ? 'recommend' : ''}" data-key="${p.key}">
+        ${i === 1 ? '<span class="plan-tag">最受欢迎</span>' : ''}
+        <h3>${esc(p.name)}</h3>
+        <div class="plan-price"><small style="font-size:18px">¥</small>${Number(p.price).toFixed(0)}
+          <small> / ${durationText(p)}</small></div>
+        <div class="small muted">${fmtBytes(p.storage_quota_mb * 1024 * 1024)} 空间 · 单文件 ${fmtBytes(p.max_file_mb * 1024 * 1024)}</div>
+        <ul class="plan-features">${p.benefits.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
+        <button class="btn ${i === 1 ? 'btn-primary' : ''} choose-btn" data-id="${p.id}" style="width:100%">选择此方案</button>
+      </div>`).join('');
+    document.querySelectorAll('.choose-btn').forEach((b) =>
+      b.addEventListener('click', () => {
+        selectedPlan = Number(b.dataset.id);
+        document.querySelectorAll('.plan-card').forEach((c) =>
+          c.style.boxShadow = Number(c.querySelector('.choose-btn').dataset.id) === selectedPlan
+            ? '0 0 0 2px var(--primary)' : '');
+        document.getElementById('pay-card').style.display = 'block';
+        document.getElementById('pay-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      })
+    );
+  }
+
+  function renderMethods() {
+    document.getElementById('methods').innerHTML = METHODS.map((m, i) => `
+      <div class="pay-method ${i === 0 ? 'active' : ''}" data-key="${m.key}">
+        <span class="pico">${payIcon(m.key)}</span>${esc(m.label)}</div>`).join('');
+    selectedMethod = METHODS[0]?.key || null;
+    document.querySelectorAll('.pay-method').forEach((el) =>
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.pay-method').forEach((x) => x.classList.remove('active'));
+        el.classList.add('active');
+        selectedMethod = el.dataset.key;
+      })
+    );
+  }
+
+  function submitToGateway(submitUrl, params) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = submitUrl;
+    for (const [k, v] of Object.entries(params)) {
+      const inp = document.createElement('input');
+      inp.type = 'hidden'; inp.name = k; inp.value = v;
+      form.appendChild(inp);
+    }
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+  document.getElementById('pay-btn').addEventListener('click', async () => {
+    if (!selectedPlan) return toast('请先选择会员方案', 'error');
+    if (!selectedMethod) return toast('请选择支付方式', 'error');
+    const btn = document.getElementById('pay-btn');
+    btn.disabled = true; btn.textContent = '正在跳转支付…';
+    try {
+      const r = await api('/orders', { method: 'POST', body: { plan_id: selectedPlan, method: selectedMethod } });
+      submitToGateway(r.submit_url, r.params);
+    } catch (e) {
+      toast(e.message, 'error');
+      btn.disabled = false; btn.textContent = '立即支付';
+    }
+  });
+
+  init();
+</script>
+</body>
+</html>
