@@ -1,0 +1,25 @@
+{
+  "name": "BDrive 商务网盘",
+  "short_name": "BDrive",
+  "description": "安全、高速的企业级文件存储与分享平台：大文件传输、文件夹分享、弹性会员配额。",
+  "id": "/",
+  "start_url": "/drive.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070b18",
+  "theme_color": "#0b1230",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["productivity", "business", "utilities"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "我的网盘", "short_name": "网盘", "url": "/drive.html" },
+    { "name": "会员升级", "short_name": "会员", "url": "/pricing.html" },
+    { "name": "我的订单", "short_name": "订单", "url": "/orders.html" }
+  ]
+}
