@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b1230" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="BDrive" />
+<script src="/js/pwa.js" defer></script>
+<title>文件分享 · BDrive</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="container share-page">
+  <div class="nav">
+    <a class="nav-brand" href="/"><span class="logo">☁</span><span>BDrive</span></a>
+    <div class="spacer" style="flex:1"></div>
+    <a class="btn btn-sm" href="/login.html">登录我的网盘</a>
+  </div>
+  <div class="card mt16" id="content"><div class="empty">加载中…</div></div>
+</div>
+<script src="/js/common.js"></script>
+<script>
+  const TOKEN = qparam('token');
+  let CODE = sessionStorage.getItem('shcode_' + TOKEN) || '';
+  let ROOT_KIND = 'file';
+  let ROOT_NAME = '';
+
+  async function init() {
+    if (!TOKEN) return showError('缺少分享参数');
+    await loadMeta();
+  }
+
+  function showError(msg) {
+    document.getElementById('content').innerHTML =
+      `<div class="share-hero"><div class="big">🔗</div><h3>${esc(msg)}</h3>
+       <a class="btn btn-primary mt16" href="/login.html">返回首页</a></div>`;
+  }
+
+  async function loadMeta() {
+    try {
+      const r = await api('/public/share/' + TOKEN, { query: { code: CODE } });
+      ROOT_KIND = r.file.kind; ROOT_NAME = r.file.name;
+      renderShareHead(r);
+      if (ROOT_KIND === 'file') renderFileRoot(r);
+      else await openFolder(r.file.id, '');
+    } catch (e) {
+      if (e.status === 403) renderPasscode(e.message);
+      else showError(e.message);
+    }
+  }
+
+  function renderPasscode(msg) {
+    document.getElementById('content').innerHTML = `
+      <div class="share-hero">
+        <div class="big">🔒</div>
+        <h3>该分享需要提取码</h3>
+        <p class="muted">${esc(msg || '请输入 4 位提取码')}</p>
+        <div style="max-width:260px;margin:18px auto 0">
+          <input class="code-input" id="code" maxlength="4" inputmode="numeric" placeholder="••••" />
+          <button class="btn btn-primary" id="code-btn" style="width:100%;margin-top:14px">确认</button>
+        </div>
+      </div>`;
+    const input = document.getElementById('code');
+    input.focus();
+    const submit = async () => {
+      CODE = input.value.trim();
+      if (!/^\d{4}$/.test(CODE)) return toast('请输入 4 位数字提取码', 'error');
+      sessionStorage.setItem('shcode_' + TOKEN, CODE);
+      await loadMeta();
+    };
+    document.getElementById('code-btn').onclick = submit;
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+  }
+
+  function renderShareHead(r) {
+    const exp = r.share.expires_at ? '有效期至 ' + fmtDate(r.share.expires_at) : '永久有效';
+    const limit = r.share.max_downloads != null ? ` · 已下载 ${r.share.downloads}/${r.share.max_downloads}` : ` · 已下载 ${r.share.downloads} 次`;
+    document.getElementById('content').innerHTML = `
+      <div class="flex" style="gap:12px">
+        <div style="font-size:34px">${ROOT_KIND === 'folder' ? '📁' : fileIcon(r.file.name, 'file').icon}</div>
+        <div style="flex:1;min-width:0">
+          <h2 style="margin:0;font-size:18px;word-break:break-all">${esc(r.file.name)}</h2>
+          <div class="small muted">${ROOT_KIND === 'file' ? fmtBytes(r.file.size) : '文件夹'} · ${exp}${limit}</div>
+        </div>
+      </div>
+      <div id="dir-area" class="mt16"></div>`;
+  }
+
+  function renderFileRoot(r) {
+    document.getElementById('dir-area').innerHTML = `
+      <div class="flex-end mt16">
+        <a class="btn btn-primary" href="${downloadUrl(r.file.id, 1)}">⬇ 下载文件</a>
+      </div>`;
+  }
+
+  function downloadUrl(id, dl) {
+    const q = new URLSearchParams();
+    if (CODE) q.set('code', CODE);
+    if (dl) q.set('dl', '1');
+    return `${API}/public/share/${TOKEN}/download/${id}?${q.toString()}`;
+  }
+
+  async function openFolder(folderId, name) {
+    const area = document.getElementById('dir-area');
+    area.innerHTML = '<div class="empty">加载中…</div>';
+    try {
+      const r = await api(`/public/share/${TOKEN}/list`, { query: { code: CODE, folder: folderId } });
+      let html = '';
+      const all = [...r.folders.map((f) => ({ ...f, kind: 'folder' })), ...r.files.map((f) => ({ ...f, kind: 'file' }))];
+      if (!all.length) html = '<div class="empty" style="padding:40px">文件夹为空</div>';
+      else html = all.map((f) => {
+        const fi = fileIcon(f.name, f.kind);
+        return `<div class="file-row">
+          <div class="ficon ${fi.cls}">${fi.icon}</div>
+          <div class="file-main" ${f.kind === 'folder' ? `data-folder="${f.id}" data-name="${esc(f.name)}"` : ''}>
+            <div class="file-name ${f.kind === 'folder' ? 'link' : ''}">${esc(f.name)}</div>
+            <div class="file-meta">${f.kind === 'folder' ? '文件夹' : fmtBytes(f.size)}</div>
+          </div>
+          ${f.kind === 'file' ? `<a class="btn btn-sm" href="${downloadUrl(f.id, 0)}" target="_blank">预览</a>
+             <a class="btn btn-sm btn-primary" href="${downloadUrl(f.id, 1)}">下载</a>` : ''}
+        </div>`;
+      }).join('');
+      area.innerHTML = html;
+      area.querySelectorAll('[data-folder]').forEach((el) =>
+        el.addEventListener('click', () => openFolder(Number(el.dataset.folder), el.dataset.name))
+      );
+    } catch (e) {
+      area.innerHTML = `<div class="empty">${esc(e.message)}</div>`;
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
