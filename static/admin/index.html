@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b1230" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="BDrive" />
+<script src="/js/pwa.js" defer></script>
+<title>管理后台 · BDrive</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="nav">
+  <a class="nav-brand" href="/admin/index.html"><span class="logo">☁</span><span>BDrive 管理后台</span></a>
+  <div class="spacer" style="flex:1"></div>
+  <a class="btn btn-sm" href="/drive.html">返回前台</a>
+  <span class="nav-user"><span class="email" id="admin-email"></span></span>
+</div>
+<div class="admin-layout">
+  <div class="admin-side" id="side">
+    <a data-tab="dashboard" class="active">📊 仪表盘</a>
+    <a data-tab="users">👤 用户管理</a>
+    <a data-tab="plans">💎 会员套餐</a>
+    <a data-tab="orders">🧾 订单管理</a>
+    <a data-tab="files">📦 文件管理</a>
+    <a data-tab="shares">🔗 分享管理</a>
+    <a data-tab="settings">⚙️ 系统设置</a>
+  </div>
+  <div class="admin-main" id="main"><div class="empty">加载中…</div></div>
+</div>
+<script src="/js/common.js"></script>
+<script src="/js/pwd-toggle.js"></script>
+<script src="/admin/admin.js"></script>
+</body>
+</html>
