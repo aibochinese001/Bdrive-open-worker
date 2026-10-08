@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#070b18" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="BDrive" />
+<script src="/js/pwa.js" defer></script>
+  <title>BDrive 商务网盘 · 安全高速的企业级文件存储与分享平台</title>
+  <meta name="description" content="BDrive 商务网盘：大文件极速上传下载、文件夹分享与提取码、弹性会员配额、多用户管理后台，支持微信、支付宝、数字人民币与 USDT 支付。" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☁️</text></svg>" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/landing.css" />
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<nav class="lp-nav">
+  <a class="brand" href="/"><span class="logo">☁</span><span>BDrive</span></a>
+  <div class="menu">
+    <a href="#features">产品功能</a>
+    <a href="#how">如何使用</a>
+    <a href="#plans">会员方案</a>
+    <a href="#faq">常见问题</a>
+  </div>
+  <div class="actions" id="nav-actions">
+    <a class="lp-btn lp-btn-ghost lp-btn-sm" href="/login.html">登录</a>
+    <a class="lp-btn lp-btn-primary lp-btn-sm" href="/login.html">免费注册</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="lp-hero">
+  <div class="lp-hero-inner">
+    <div>
+      <span class="lp-badge">⚡ 基于 Cloudflare 全球边缘网络的商务云盘</span>
+      <h1>安全、高速的<br />企业级文件存储与分享平台</h1>
+      <p class="lead">
+        大文件秒传秒下、断点续传，文件夹一键分享并可设置提取码、有效期与访问次数；
+        <b>对方打开链接即可直链下载，无需注册登录、全程无广告打扰</b>——客户交付更体面，商务沟通更高效。
+      </p>
+      <div class="lp-hero-cta" id="hero-cta">
+        <a class="lp-btn lp-btn-light" href="/login.html" style="background:#fff;color:#4f46e5;">免费开始使用 →</a>
+        <a class="lp-btn lp-btn-light" href="#plans">查看会员方案</a>
+      </div>
+      <div class="lp-hero-pay">
+        支持多种便捷支付：
+        <span class="lp-chip">💚 微信支付</span>
+        <span class="lp-chip">💙 支付宝</span>
+        <span class="lp-chip">¥ 数字人民币</span>
+        <span class="lp-chip">₮ USDT</span>
+      </div>
+    </div>
+    <div class="lp-mock" aria-hidden="true">
+      <div class="lp-mock-bar"><i></i><i></i><i></i><span>BDrive · 我的网盘</span></div>
+      <div class="lp-mock-body">
+        <div class="lp-mock-upload">⤴ 拖拽文件到此处，或点击上传</div>
+        <div class="lp-mock-row">
+          <span class="fi">📊</span>
+          <span class="fn"><b>2026 产品方案.xlsx</b>
+            <span class="lp-mock-progress"><i></i></span>
+            <small>46.8 MB · 上传中 72%</small>
+          </span>
+        </div>
+        <div class="lp-mock-row">
+          <span class="fi">🎬</span>
+          <span class="fn"><b>发布会视频.mp4</b><small>1.2 GB · 支持在线播放 / Range 拖动</small></span>
+          <span class="tag">已完成</span>
+        </div>
+        <div class="lp-mock-row">
+          <span class="fi">📁</span>
+          <span class="fn"><b>客户交付资料</b><small>文件夹分享 · 提取码 8 位 · 7 天有效</small></span>
+          <span class="tag">分享中</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 功能特性 -->
+<section class="lp-section" id="features">
+  <div class="lp-wrap">
+    <div class="lp-head">
+      <div class="kicker">FEATURES</div>
+      <h2>为商务场景打造的网盘能力</h2>
+      <p>从个人文件备份到团队协作、客户资料交付，BDrive 提供完整且可靠的文件管理闭环。</p>
+    </div>
+
+    <!-- 核心体验强调：直链下载 · 无广告 · 无需登录 -->
+    <div class="lp-highlight rv">
+      <div class="lp-hl-title"><span class="hl-fire">⚡</span> 商务交付三大体验优势 <span class="hl-tag">客户体验拉满 · 商务场景必备</span></div>
+      <div class="lp-hl-grid">
+        <div class="lp-hl-item">
+          <div class="hl-ico">🔗</div>
+          <h3>直链下载</h3>
+          <p>分享即直达文件，点击链接立刻高速下载，支持断点续传与大文件，不跳转、不绕路。</p>
+        </div>
+        <div class="lp-hl-item">
+          <div class="hl-ico">🚫</div>
+          <h3>全程无广告</h3>
+          <p>页面干净纯粹，无弹窗、无诱导点击、无限速套路，树立专业可信的品牌形象。</p>
+        </div>
+        <div class="lp-hl-item">
+          <div class="hl-ico">👤</div>
+          <h3>对方无需登录</h3>
+          <p>客户拿到链接（凭提取码）即可查看下载，零门槛、零注册，沟通交付一步到位。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="lp-features">
+      <div class="lp-feature">
+        <div class="ico">🚀</div>
+        <h3>大文件极速传输</h3>
+        <p>流式上传下载直连对象存储，支持 HTTP Range 请求，视频可拖动播放、下载可断点续传，单文件支持数百 MB。</p>
+      </div>
+      <div class="lp-feature">
+        <div class="ico">🔗</div>
+        <h3>免登录直链分享</h3>
+        <p>文件或整个文件夹一键生成直链，客户<b>无需注册登录、页面无任何广告</b>，凭 8 位提取码即可高速下载；可设有效期与最大访问次数，到期或超限自动失效。</p>
+      </div>
+      <div class="lp-feature">
+        <div class="ico">🗂️</div>
+        <h3>多层文件夹管理</h3>
+        <p>支持新建文件夹、重命名、移动与递归删除，面包屑导航与关键字搜索，再多文件也井井有条。</p>
+      </div>
+      <div class="lp-feature">
+        <div class="ico">💳</div>
+        <h3>弹性会员配额</h3>
+        <p>免费即得 1 GB 空间，月付 / 季付 / 年付会员最高可扩至 1 TB，到期自动回落免费额度，续费实时到账。</p>
+      </div>
+      <div class="lp-feature">
+        <div class="ico">🛡️</div>
+        <h3>企业级安全</h3>
+        <p>密码经 PBKDF2-SHA256 加盐十万次哈希存储，HttpOnly 会话 Cookie、用户数据严格隔离，全站 HTTPS 加密。</p>
+      </div>
+      <div class="lp-feature">
+        <div class="ico">⚙️</div>
+        <h3>多用户与管理后台</h3>
+        <p>管理员可查看全部用户、调整套餐与配额、管理订单与分享、监控存储用量，并在线配置支付网关。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 如何使用 -->
+<section class="lp-section alt" id="how">
+  <div class="lp-wrap">
+    <div class="lp-head">
+      <div class="kicker">HOW IT WORKS</div>
+      <h2>三步开始使用</h2>
+      <p>注册即用，无需下载安装，浏览器打开即可管理全部文件。</p>
+    </div>
+    <div class="lp-steps">
+      <div class="lp-step rv">
+        <div class="num"><span>1</span></div>
+        <div class="st-txt"><h3>注册账号</h3>
+        <p>使用邮箱快速注册，自动开通免费账户，立即获得存储空间。</p></div>
+      </div>
+      <div class="lp-step rv">
+        <div class="num"><span>2</span></div>
+        <div class="st-txt"><h3>上传与整理</h3>
+        <p>上传文件、建立文件夹，随时重命名、移动、搜索，进度实时可见。</p></div>
+      </div>
+      <div class="lp-step rv">
+        <div class="num"><span>3</span></div>
+        <div class="st-txt"><h3>分享或升级</h3>
+        <p>生成带提取码的分享链接发给客户同事；需要更大空间可随时开通会员。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 会员方案 -->
+<section class="lp-section" id="plans">
+  <div class="lp-wrap">
+    <div class="lp-head">
+      <div class="kicker">PRICING</div>
+      <h2>简单透明的会员方案</h2>
+      <p>免费开始，按需升级；所有套餐均支持微信、支付宝、数字人民币与 USDT 支付。</p>
+    </div>
+    <div class="lp-pricing" id="pricing-cards">
+      <!-- 免费档与付费套餐均由 /api/plans 动态渲染，与后台会员设置实时一致 -->
+    </div>
+
+    <!-- 套餐之外 · 个性化定制 -->
+    <div class="lp-custom" id="custom-band">
+      <div class="lp-custom-ico">🎯</div>
+      <div class="lp-custom-txt">
+        <h3>套餐之外，还有个性化需求？</h3>
+        <p>如需更大存储容量、团队多人协作空间、独立域名 / 独立部署、专属品牌与权限管理等定制方案，欢迎联系客服，我们将为你量身打造。</p>
+      </div>
+      <a class="lp-btn lp-btn-primary" id="custom-contact" href="/login.html">联系客服定制</a>
+    </div>
+  </div>
+</section>
+
+<!-- 支付方式 -->
+<section class="lp-section alt">
+  <div class="lp-wrap">
+    <div class="lp-head">
+      <div class="kicker">PAYMENTS</div>
+      <h2>四种支付方式，开通即时到账</h2>
+      <p>对接易支付网关，支付成功后由服务端验签并自动开通会员，安全可靠。</p>
+    </div>
+    <div class="lp-payband">
+      <div class="lp-pay-item"><span class="pi">💚</span>微信支付</div>
+      <div class="lp-pay-item"><span class="pi">💙</span>支付宝</div>
+      <div class="lp-pay-item"><span class="pi">¥</span>数字人民币</div>
+      <div class="lp-pay-item"><span class="pi">₮</span>USDT</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="lp-section" id="faq">
+  <div class="lp-wrap">
+    <div class="lp-head">
+      <div class="kicker">FAQ</div>
+      <h2>常见问题</h2>
+    </div>
+    <div class="lp-faq">
+      <details>
+        <summary>免费账户有什么限制？</summary>
+        <p>免费账户拥有 1 GB 总存储空间，单文件最大 100 MB，具备完整的上传、下载、文件夹与分享功能。容量不够时可随时升级会员，升级后立即获得对应配额。</p>
+      </details>
+      <details>
+        <summary>分享链接可以控制访问权限吗？</summary>
+        <p>可以。每个分享都能单独设置 8 位提取码、失效时间（如 1 天 / 7 天 / 永久）以及最大访问次数；文件夹分享会连带其内部全部文件，接收方无需登录即可浏览下载。</p>
+      </details>
+      <details>
+        <summary>会员到期后我的文件会怎样？</summary>
+        <p>会员到期后配额回落到免费版的 1 GB，但已有文件不会被删除，仍可下载与管理，只是在用量回落到额度内之前不能继续上传；续费后立即恢复全部容量。</p>
+      </details>
+      <details>
+        <summary>支付安全如何保障？</summary>
+        <p>支付通过易支付网关完成，回调由服务端进行 MD5 签名校验、金额核对与订单幂等处理，任何伪造或重复通知都不会重复开通；密码使用 PBKDF2-SHA256 加盐哈希存储，全站强制 HTTPS。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 底部 CTA -->
+<section class="lp-section" style="padding-top:20px;">
+  <div class="lp-wrap">
+    <div class="lp-cta">
+      <h2>现在就把文件搬上 BDrive</h2>
+      <p>注册仅需邮箱，1 GB 空间免费开用，随时可升级会员方案。</p>
+      <div class="lp-hero-cta" id="foot-cta">
+        <a class="lp-btn" href="/login.html" style="background:#fff;color:#4f46e5;">免费注册 / 登录</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="lp-footer">
+  <div class="lp-wrap">
+    <div class="lp-footer-inner">
+      <div>
+        <div class="brand"><span class="logo">☁</span>BDrive 商务网盘</div>
+        <p>基于全球边缘网络构建的企业级文件存储与分享平台，为团队协作与商务交付提供安全、高速、可靠的云盘服务。</p>
+      </div>
+      <div class="col">
+        <h4>产品</h4>
+        <a href="#features">产品功能</a>
+        <a href="#plans">会员方案</a>
+        <a href="#how">使用指南</a>
+      </div>
+      <div class="col">
+        <h4>账户</h4>
+        <a href="/login.html">登录</a>
+        <a href="/login.html">注册</a>
+        <a href="/drive.html">我的网盘</a>
+      </div>
+      <div class="col">
+        <h4>支持</h4>
+        <a href="#faq">常见问题</a>
+      </div>
+    </div>
+    <div class="lp-copy">© 2026 · 由 <a href="https://opcgrow.org" target="_blank" rel="noopener noreferrer">opcgrow.org</a> 提供技术支持</div>
+  </div>
+</footer>
+
+<!-- 悬浮在线客服：点击弹出内嵌对话框 -->
+<button class="lp-chat-fab" id="chatFab" type="button" aria-label="在线客服" aria-expanded="false" title="在线客服">
+  <span class="cf-pulse"></span>
+  <span class="cf-ico">💬</span>
+</button>
+<div class="lp-chat-mask" id="chatMask" hidden></div>
+<aside class="lp-chat" id="chatPanel" role="dialog" aria-modal="false" aria-label="在线客服窗口" aria-hidden="true">
+  <div class="lp-chat-grip"></div>
+  <header class="lc-head">
+    <div class="lc-id">
+      <span class="lc-av">🎧</span>
+      <span class="lc-meta">
+        <strong>BDrive 在线客服</strong>
+        <small><i class="lc-dot"></i>在线 · 通常几分钟内回复</small>
+      </span>
+    </div>
+    <div class="lc-ops">
+      <a href="/support/" target="_blank" rel="noopener" class="lc-icon" title="新窗口打开" aria-label="新窗口打开">↗</a>
+      <button type="button" class="lc-icon" id="chatClose" title="关闭" aria-label="关闭客服窗口">✕</button>
+    </div>
+  </header>
+  <div class="lc-body" id="chatBody">
+    <div class="lc-loading" id="chatLoading"><span class="lc-spin"></span>正在连接客服…</div>
+    <iframe id="chatFrame" title="BDrive 在线客服" allow="clipboard-read; clipboard-write; microphone; camera; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div class="lc-fail" id="chatFail" hidden>
+      <p>客服窗口暂时无法显示，可在新窗口继续咨询。</p>
+      <a class="lp-btn lp-btn-primary" href="/support/" target="_blank" rel="noopener">新窗口打开客服 ↗</a>
+    </div>
+  </div>
+</aside>
+
+<script>
+(function () {
+  var PRICING_URL = '/pricing.html';
+
+  /* ---- 滚动渐入 ---- */
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12 }) : null;
+  function reveal(list) {
+    (list || []).forEach(function (el) {
+      if (!el || el.getAttribute('data-rv')) return;
+      el.setAttribute('data-rv', '1');
+      el.classList.add('rv');
+      if (io) io.observe(el); else el.classList.add('in');
+    });
+  }
+  function revealAll() {
+    reveal(Array.prototype.slice.call(document.querySelectorAll(
+      '.lp-highlight, .lp-feature, .lp-step, #custom-band, .lp-cta, .lp-faq details, .lp-pay-item, .lp-price-card'
+    )));
+  }
+  document.addEventListener('DOMContentLoaded', revealAll);
+  /* ---- /滚动渐入 ---- */
+
+  function authedUI(me) {
+    var nav = document.getElementById('nav-actions');
+    nav.innerHTML = '<a class="lp-btn lp-btn-ghost lp-btn-sm" href="/pricing.html">升级会员</a>'
+      + '<a class="lp-btn lp-btn-primary lp-btn-sm" href="/drive.html">进入我的网盘</a>';
+    document.getElementById('hero-cta').innerHTML =
+      '<a class="lp-btn" style="background:#fff;color:#4f46e5;" href="/drive.html">进入我的网盘 →</a>'
+      + '<a class="lp-btn lp-btn-light" href="/pricing.html">升级会员方案</a>';
+    document.getElementById('foot-cta').innerHTML =
+      '<a class="lp-btn" style="background:#fff;color:#4f46e5;" href="/drive.html">进入我的网盘</a>';
+  }
+
+  // 登录态自适应
+  fetch('/api/auth/me', { credentials: 'same-origin' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (me) { if (me && me.email) authedUI(me); })
+    .catch(function () {});
+
+  // 动态加载付费套餐
+  function quotaText(mb) {
+    return mb >= 1024 ? (mb / 1024) + ' GB' : mb + ' MB';
+  }
+  function durationText(p) {
+    if (p.duration_type === 'forever') return '永久';
+    var u = { day: '天', month: '个月', year: '年' }[p.duration_type] || '';
+    return p.duration_value + u;
+  }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+    });
+  }
+  fetch('/api/plans')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var box = document.getElementById('pricing-cards');
+      box.innerHTML = '';
+
+      // 免费档（后台设置：free_quota_mb / free_max_file_mb）
+      var fr = data.free || { name: '免费版', price: 0, storage_quota_mb: 1024, max_file_mb: 100 };
+      var freeCard = document.createElement('div');
+      freeCard.className = 'lp-price-card';
+      freeCard.innerHTML =
+        '<h3>' + esc(fr.name) + '</h3>'
+        + '<div class="price">¥0<small> / 永久</small></div>'
+        + '<div class="quota">总空间 ' + quotaText(fr.storage_quota_mb) + ' · 单文件 ' + quotaText(fr.max_file_mb) + '</div>'
+        + '<ul>'
+        + '<li>文件上传下载与在线播放</li>'
+        + '<li>多层文件夹与关键字搜索</li>'
+        + '<li>分享链接 + 提取码 / 有效期</li>'
+        + '<li>全站 HTTPS 安全访问</li>'
+        + '</ul>'
+        + '<a class="lp-btn lp-btn-ghost" href="/login.html">免费开始</a>';
+      box.appendChild(freeCard);
+
+      // 付费套餐（后台会员套餐设置，数量/价格/配额/权益完全动态）
+      (data.plans || []).forEach(function (p, i) {
+        var hot = (i === 1); // 中间套餐标为推荐，与会员页一致
+        var card = document.createElement('div');
+        card.className = 'lp-price-card' + (hot ? ' hot' : '');
+        var benefits = (p.benefits && p.benefits.length
+          ? p.benefits
+          : ['会员期内全部网盘功能', '超大存储配额，随开随用', '文件夹分享 · 提取码 · 次数限制', '微信 / 支付宝 / 数字人民币 / USDT'])
+          .map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('');
+        card.innerHTML =
+          (hot ? '<div class="ribbon">最受欢迎</div>' : '')
+          + '<h3>' + esc(p.name) + '</h3>'
+          + '<div class="price">¥' + Number(p.price).toFixed(0) + '<small> / ' + durationText(p) + '</small></div>'
+          + '<div class="quota">总空间 ' + quotaText(p.storage_quota_mb) + ' · 单文件 ' + quotaText(p.max_file_mb) + '</div>'
+          + '<ul>' + benefits + '</ul>'
+          + '<a class="lp-btn ' + (hot ? 'lp-btn-primary' : 'lp-btn-ghost') + '" href="/login.html?redirect=' + encodeURIComponent(PRICING_URL) + '">立即开通</a>';
+        box.appendChild(card);
+      });
+      reveal([freeCard]);
+      reveal(Array.prototype.slice.call(box.querySelectorAll('.lp-price-card')));
+    })
+    .catch(function () {});
+
+  // 客服邮箱（后台系统设置 support_email），用于“联系客服定制”
+  fetch('/api/auth/site')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (info) {
+      if (info && info.support_email) {
+        var a = document.getElementById('custom-contact');
+        a.href = 'mailto:' + info.support_email + '?subject=' + encodeURIComponent('BDrive 个性化定制需求');
+        a.textContent = '联系客服：' + info.support_email;
+      }
+    })
+    .catch(function () {});
+
+  /* ---- 悬浮在线客服：点击弹出内嵌 iframe 对话框 ---- */
+  var CHAT_URL = '/support/';
+  var fab = document.getElementById('chatFab');
+  var panel = document.getElementById('chatPanel');
+  var mask = document.getElementById('chatMask');
+  var closeBtn = document.getElementById('chatClose');
+  var frame = document.getElementById('chatFrame');
+  var chatBody = document.getElementById('chatBody');
+  var loading = document.getElementById('chatLoading');
+  var fail = document.getElementById('chatFail');
+  var chatLoaded = false, failTimer = null;
+  var isMobile = function () { return window.matchMedia('(max-width: 680px)').matches; };
+  function lockScroll(on) { document.body.style.overflow = (on && isMobile()) ? 'hidden' : ''; }
+
+  function openChat() {
+    if (panel.classList.contains('open')) return;
+    mask.hidden = false; void mask.offsetWidth;       // 先占位再触发淡入
+    document.body.classList.add('chat-open');
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    fab.setAttribute('aria-expanded', 'true');
+    lockScroll(true);
+    if (!frame.src) {                                // 首次打开才加载，弹窗即时出现
+      frame.src = CHAT_URL;
+      failTimer = setTimeout(function () {
+        if (!chatLoaded) { fail.hidden = false; loading.style.display = 'none'; }
+      }, 9000);
+    }
+  }
+  function closeChat() {
+    document.body.classList.remove('chat-open');
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    fab.setAttribute('aria-expanded', 'false');
+    lockScroll(false);
+    setTimeout(function () { if (!panel.classList.contains('open')) mask.hidden = true; }, 280);
+  }
+  frame.addEventListener('load', function () {
+    chatLoaded = true;
+    if (failTimer) clearTimeout(failTimer);
+    fail.hidden = true; loading.style.display = 'none'; chatBody.classList.add('loaded');
+  });
+  fab.addEventListener('click', openChat);
+  closeBtn.addEventListener('click', closeChat);
+  mask.addEventListener('click', closeChat);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && panel.classList.contains('open')) closeChat();
+  });
+})();
+</script>
+</body>
+</html>
