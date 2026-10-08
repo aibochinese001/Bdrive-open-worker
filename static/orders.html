@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b1230" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="BDrive" />
+<script src="/js/pwa.js" defer></script>
+<title>我的订单 · BDrive</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h2>我的订单</h2>
+    <div id="highlight"></div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>订单号</th><th>方案</th><th>金额</th><th>支付方式</th><th>状态</th><th>创建时间</th><th>支付时间</th><th>操作</th></tr></thead>
+        <tbody id="rows"><tr><td colspan="8" class="empty">加载中…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script src="/js/common.js"></script>
+<script src="/js/pwd-toggle.js"></script>
+<script>
+  const focusOrder = qparam('order_no');
+
+  async function init() {
+    const me = await renderNav('orders');
+    if (!me) return;
+    await load();
+    if (focusOrder) {
+      pollOrder(focusOrder);
+      const r = await api('/orders/' + focusOrder).catch(() => null);
+      if (r && r.order.status === 'pending') document.getElementById('highlight').innerHTML =
+        '<div class="copy-box mt8">支付结果将由支付平台异步通知，如已完成支付，本页会自动刷新；也可点「继续支付」重新发起。</div>';
+    }
+  }
+
+  async function load() {
+    const r = await api('/orders');
+    const rows = document.getElementById('rows');
+    if (!r.orders.length) {
+      rows.innerHTML = '<tr><td colspan="8" class="empty" style="padding:40px">暂无订单，去 <a href="/pricing.html">开通会员</a></td></tr>';
+      return;
+    }
+    rows.innerHTML = r.orders.map((o) => `<tr ${o.order_no === focusOrder ? 'style="background:#f0f7ff"' : ''}>
+      <td class="wrap">${esc(o.order_no)}</td>
+      <td>${esc(o.plan_name)}</td>
+      <td>¥${Number(o.amount).toFixed(2)}</td>
+      <td>${payIcon(o.method)} ${payLabel(o.method)}</td>
+      <td>${statusBadge(o.status)}</td>
+      <td>${fmtDate(o.created_at)}</td>
+      <td>${fmtDate(o.paid_at)}</td>
+      <td>${o.status === 'pending' ? `<button class="btn btn-sm btn-primary pay-again" data-no="${esc(o.order_no)}">继续支付</button>` : ''}</td>
+    </tr>`).join('');
+    document.querySelectorAll('.pay-again').forEach((b) =>
+      b.addEventListener('click', () => payAgain(b.dataset.no))
+    );
+  }
+
+  async function payAgain(orderNo) {
+    try {
+      const r = await api(`/orders/${orderNo}/pay`, { method: 'POST' });
+      const form = document.createElement('form');
+      form.method = 'POST'; form.action = r.submit_url;
+      for (const [k, v] of Object.entries(r.params)) {
+        const inp = document.createElement('input');
+        inp.type = 'hidden'; inp.name = k; inp.value = v; form.appendChild(inp);
+      }
+      document.body.appendChild(form); form.submit();
+    } catch (e) { toast(e.message, 'error'); }
+  }
+
+  function pollOrder(no) {
+    let tries = 0;
+    const timer = setInterval(async () => {
+      tries++;
+      try {
+        const r = await api('/orders/' + no);
+        if (r.order.status === 'paid') {
+          clearInterval(timer);
+          toast('支付成功，会员已开通', 'success');
+          await load();
+          const me = await getMe(true);
+          setTimeout(() => location.reload(), 1200);
+        }
+      } catch {}
+      if (tries > 20) clearInterval(timer);
+    }, 3000);
+  }
+
+  init();
+</script>
+</body>
+</html>
