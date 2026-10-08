@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>离线 · BDrive</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☁️</text></svg>" />
+<style>
+  * { box-sizing: border-box; }
+  html,body { margin:0; height:100%; }
+  body {
+    background:#070b18; color:#eaf0ff;
+    font-family:-apple-system,'Segoe UI','Microsoft YaHei',Helvetica,Arial,sans-serif;
+    display:flex; align-items:center; justify-content:center; padding:24px; text-align:center;
+    background-image:
+      radial-gradient(560px 320px at 50% -10%, rgba(99,102,241,.25), transparent 60%),
+      linear-gradient(rgba(120,145,255,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,145,255,.05) 1px, transparent 1px);
+    background-size:auto, 42px 42px, 42px 42px;
+  }
+  .card { max-width:420px; }
+  .logo {
+    width:76px; height:76px; margin:0 auto 22px; border-radius:20px;
+    background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+    display:flex; align-items:center; justify-content:center; font-size:40px;
+    box-shadow:0 18px 50px rgba(99,102,241,.5);
+  }
+  h1 { font-size:22px; margin:0 0 12px; }
+  p { color:#9fb0d4; line-height:1.8; margin:0 0 26px; font-size:14.5px; }
+  button {
+    appearance:none; border:none; cursor:pointer; color:#fff; font-weight:600; font-size:15px;
+    padding:12px 28px; border-radius:11px; background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+    box-shadow:0 12px 30px rgba(99,102,241,.45);
+  }
+  button:active { transform:scale(.97); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">☁</div>
+    <h1>当前处于离线状态</h1>
+    <p>BDrive 需要联网才能同步与管理你的文件。请检查网络连接后重试，已缓存的页面仍可正常打开。</p>
+    <button onclick="location.reload()">重新连接</button>
+  </div>
+</body>
+</html>
