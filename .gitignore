@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# wrangler local state
+.wrangler/
+
+# local secrets
+.dev.vars
+
+# real config with your D1 id — never commit; copy from wrangler.jsonc.example
+wrangler.jsonc
+
+# logs & scratch
+*.log
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
