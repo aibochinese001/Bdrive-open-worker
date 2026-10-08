@@ -414,7 +414,10 @@ async function renderSettings() {
         </div>
       </div>
       <div class="card">
-        <h3>易支付（EPay）配置</h3>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+          <h3 style="margin:0">易支付（EPay）配置</h3>
+          <a class="btn btn-success btn-sm" href="https://apicn.payone.uk" target="_blank" rel="noopener noreferrer">开通商户 ↗</a>
+        </div>
         <label>网关地址（到站点根目录即可，自动补 submit.php）</label>
         <input id="set-epay_api_url" value="${esc(s.epay_api_url)}" placeholder="https://pay.example.com" />
         <div class="grid-2">
@@ -472,6 +475,7 @@ async function renderSettings() {
 
   document.getElementById('notify-url').textContent = location.origin + '/api/payment/callback';
 
+  document.getElementById('notify-url').textContent = location.origin + '/api/payment/callback';
   document.getElementById('save-settings').onclick = async () => {
     const payload = {};
     ['site_name', 'site_slogan', 'support_email', 'free_quota_mb', 'free_max_file_mb', 'epay_api_url', 'epay_pid'].forEach((k) => {
