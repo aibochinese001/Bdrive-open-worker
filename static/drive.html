@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b1230" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="BDrive" />
+<script src="/js/pwa.js" defer></script>
+<title>我的网盘 · BDrive</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="container">
+  <div id="quota-card" class="card" style="margin-bottom:18px"></div>
+
+  <div class="toolbar">
+    <button class="btn btn-primary" id="btn-upload">⬆ 上传文件</button>
+    <input type="file" id="file-input" multiple hidden />
+    <button class="btn" id="btn-folder">＋ 新建文件夹</button>
+    <button class="btn" id="btn-refresh">刷新</button>
+    <button class="btn" id="btn-shares">我的分享</button>
+    <div class="spacer"></div>
+    <div class="view-toggle" id="view-toggle" role="group" aria-label="文件查看方式">
+      <button type="button" class="vt-btn" data-view="list" title="列表视图">☰ 列表</button>
+      <button type="button" class="vt-btn" data-view="grid" title="图标视图">▦ 图标</button>
+    </div>
+    <input type="text" id="search" placeholder="搜索文件名…" style="width:200px" />
+  </div>
+
+  <div class="card" id="list-card">
+    <div class="drive-head">
+      <button class="btn btn-sm" id="btn-up" title="返回上一级">← 上一级</button>
+      <div class="breadcrumb" id="breadcrumb"></div>
+    </div>
+    <div class="file-list" id="file-list"></div>
+    <div class="drive-pager" id="pager"></div>
+  </div>
+</div>
+<script src="/js/common.js"></script>
+<script src="/js/pwd-toggle.js"></script>
+<script src="/js/drive.js"></script>
+</body>
+</html>
