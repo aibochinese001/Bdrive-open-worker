@@ -1,7 +1,7 @@
 # BDrive 商务网盘（Cloudflare Workers）
 
 基于 Cloudflare Workers + Hono + D1 + R2 的多用户商务网盘系统，带会员订阅、管理后台与易支付（微信 / 支付宝 / 数字人民币 / USDT）。
-
+用AI agent部署指南：https://opcgrow.org/article.php?id=137
 ## 功能
 
 - **用户系统**：邮箱注册登录、JWT + HttpOnly Cookie、PBKDF2(SHA-256,10 万次) 密码哈希、封禁/解封、管理员角色。
@@ -87,6 +87,7 @@ wrangler d1 execute bdrive-db --remote --command "UPDATE users SET role='admin' 
 - 网关地址（站点根目录即可，自动补 `/submit.php`）、商户 PID、商户密钥。
 - 异步通知地址：`https://<你的域名>/api/payment/callback`（需在易支付后台登记）。
 - 勾选启用的支付方式，并按你的易支付服务商填各通道 `type` 代码。
+- 开通商户：https://apicn.payone.uk
 
 ## 安全说明
 
