@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0b1230" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="BDrive" />
+<script src="/js/pwa.js" defer></script>
+<script src="/js/pwd-toggle.js" defer></script>
+<title>登录 · BDrive 商务网盘</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="card auth-card">
+    <div class="brand">☁ BDrive</div>
+    <div class="sub" id="subtitle">登录到商务网盘</div>
+    <form id="auth-form" autocomplete="on">
+      <label>邮箱</label>
+      <input type="email" id="email" placeholder="you@example.com" required />
+      <label>密码</label>
+      <input type="password" id="password" placeholder="请输入密码" minlength="6" required />
+      <div id="name-field" style="display:none">
+        <label>昵称（选填）</label>
+        <input type="text" id="name" placeholder="如何称呼你" />
+      </div>
+      <button class="btn btn-primary" id="submit-btn" type="submit">登录</button>
+    </form>
+    <div class="auth-switch">
+      <span id="switch-text">还没有账号？</span>
+      <a href="javascript:void(0)" id="switch-link">立即注册</a>
+    </div>
+  </div>
+</div>
+<script src="/js/common.js"></script>
+<script>
+  let mode = 'login';
+  const redirect = qparam('redirect') || '/drive.html';
+  const form = document.getElementById('auth-form');
+  const nameField = document.getElementById('name-field');
+  const subtitle = document.getElementById('subtitle');
+  const btn = document.getElementById('submit-btn');
+  const switchText = document.getElementById('switch-text');
+  const switchLink = document.getElementById('switch-link');
+
+  switchLink.addEventListener('click', () => {
+    mode = mode === 'login' ? 'register' : 'login';
+    const isReg = mode === 'register';
+    nameField.style.display = isReg ? 'block' : 'none';
+    subtitle.textContent = isReg ? '创建你的网盘账号' : '登录到商务网盘';
+    btn.textContent = isReg ? '注册并登录' : '登录';
+    switchText.textContent = isReg ? '已有账号？' : '还没有账号？';
+    switchLink.textContent = isReg ? '去登录' : '立即注册';
+  });
+
+  // 已登录直接跳转
+  getMe().then((me) => { if (me) location.replace(redirect); });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const name = document.getElementById('name').value.trim();
+    btn.disabled = true;
+    try {
+      const payload = { email, password };
+      if (mode === 'register') payload.name = name;
+      await api('/auth/' + mode, { method: 'POST', body: payload });
+      toast(mode === 'register' ? '注册成功' : '登录成功', 'success');
+      setTimeout(() => location.replace(redirect), 400);
+    } catch (err) {
+      toast(err.message, 'error');
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
