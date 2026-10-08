@@ -1,0 +1,32 @@
+{
+  // BDrive 商务网盘 — Cloudflare Workers 配置（示例）
+  // 复制为 wrangler.jsonc 后，用 `npm run setup` 自动回填 D1 database_id；
+  // 或手动把创建 D1 得到的 id 填入下方 REPLACE_WITH_YOUR_D1_DATABASE_ID。
+  "name": "bdrive",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-10",
+  "assets": {
+    "directory": "./static",
+    "binding": "ASSETS",
+    "not_found_handling": "none"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "bdrive-db",
+      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "bdrive-files"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "triggers": {
+    "crons": ["17 2 * * *"]
+  }
+}
